@@ -1,0 +1,8 @@
+flask
+nltk
+numpy
+scipy
+pandas
+requests
+scikit-learn
+spacy
