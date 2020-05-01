@@ -61,11 +61,15 @@ def predict():
 		elif dic['DATE'].find('tomorrow') != -1:
 			bookDate = dt.date.today() + dt.timedelta(days = 1)
 		
-		# if dic['DATE'] != ''
+		time = dic['TIME'].replace('.', '')
 		predictionjson = jsonify(
         entent = 'create',
 				date = bookDate,
-				time = datetime.strftime(datetime.strptime(dic['TIME'], "%I:%M %p"), "%H:%M")
+				time = datetime.strftime(datetime.strptime(time, "%I:%M %p"), "%H:%M")
+    )
+	elif my_prediction[0] == 4: # go to home scrren
+		predictionjson = jsonify(
+        entent = 'home'
     )
 	else:
 		print('someting different')

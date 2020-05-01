@@ -18,8 +18,9 @@ const mlController = (userFor, reqObject) => {
           requestedTime: reqObject.time
         }).then((response) => {
           resolve({
+            entent: 'create',
             statusCode: 200,
-            response,
+            transportBookingList: [response],
             msg: "We have booked your transport successfully."
           });
         })
@@ -32,12 +33,14 @@ const mlController = (userFor, reqObject) => {
           reject(err);
         } else if(transportBookingList.length < 1) {
           resolve({
+            entent: 'show',
             statusCode: 200,
             transportBookingList: [],
             msg: "We did not find any transport booking history for you."
           });
         } else {
           resolve({
+            entent: 'show',
             statusCode: 200,
             userFor: userFor,
             transportBookingList,
@@ -45,8 +48,15 @@ const mlController = (userFor, reqObject) => {
           });
         }
       })
+    } else if (reqObject.entent === 'home') {
+      resolve({
+        entent: 'home',
+        statusCode: 200,
+        msg: "Here is your home screen."
+      });
     } else {
       resolve({
+        entent: 'undefined',
         statusCode: 200,
         msg: "I did not understand, I can help you in booking transport. Thankyou."
       });
